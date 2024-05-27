@@ -23,7 +23,7 @@
             <form action="handlers/login.php" method="POST" class="w-72">
                 <input type="email" autocomplete="FALSE" name="email" placeholder="Email" class="block border border-grey-light w-full p-3 rounded mb-4" required>
                 <input type="password" autocomplete="FALSE" name="password" placeholder="Password" class="block border border-grey-light w-full p-3 rounded mb-4" required>
-                <button type="submit" class="w-full text-center py-3 rounded bg-green-500 text-white hover:bg-green-400 focus:outline-none my-1">Login</button>
+                <button type="submit" class="w-full text-center py-3 rounded-lg bg-teal-900 text-white hover:bg-teal-700 focus:outline-none my-1">Login</button>
             </form>
 
             <!-- errors -->
@@ -41,12 +41,10 @@
             }
             ?>
 
-            <p class="text-center mt-12">Don't have an account? <a href="index.php" class="font-semibold text-blue-500 hover:text-blue-400">Sign Up</a></p>
+            <p class="text-center mt-12">Don't have an account? <a href="signup.php" class="font-semibold text-blue-500 hover:text-blue-400">Sign Up</a></p>
         </div>
     </div>
 
-    <?php
-
-    ?>
+    <script src="https://cdn.tailwindcss.com"></script>
 
 </body>
