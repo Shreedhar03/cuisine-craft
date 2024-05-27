@@ -2,7 +2,7 @@
 
 # CuisineCraft
 
-CuisineCraft is a PHP application for managing restaurant menus with ease.
+CuisineCraft is a PHP application for managing restaurant digital menus with ease.
 
 ## Features
 
