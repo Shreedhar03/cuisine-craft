@@ -6,7 +6,6 @@
 <head>
     <title>Cuisine Craft</title>
     <!-- tailwind -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="global.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -31,11 +30,6 @@
 
             <?php
             session_start();
-            // show logged in user
-            if (isset($_SESSION['user'])) {
-                echo "<p class='text-green-500 text-center'>Welcome " . $_SESSION['user']['name'] . "</p>";
-                unset($_SESSION['user']);
-            }
             if (isset($_SESSION['error'])) {
                 echo "<p class='text-red-500 text-center'>" . $_SESSION['error'] . "</p>";
                 unset($_SESSION['error']);

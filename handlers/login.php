@@ -15,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Checking the connection
         if (!$PG_CONN) {
+            $_SESSION['error'] = "Error: Unable to open database";
             // echo "Error : Unable to open database\n";
         } else {
             // echo "Opened database successfully\n";
@@ -41,13 +42,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit;
         }
 
-        $_SESSION['user'] = $user;
+        // user verified
+        // set user_id in session
 
-        // show the user name
+        echo "User verified";
 
+        $_SESSION['user_id'] = $user['id'];
 
+        header("Location: ../user.php");
         pg_close($PG_CONN);
-        header("Location: ../login.php");
+
         exit;
     } else {
         $_SESSION['error'] = "Error: All fields are required";
@@ -55,6 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 } else {
+    $_SESSION['error'] = "Error: Invalid request method";
     header("Location: ../login.php");
     exit;
 }
