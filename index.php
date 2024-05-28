@@ -10,7 +10,7 @@
 
 <body>
 
-    <main class="bg-teal-900 h-[75vh] flex flex-col justify-center">
+    <main class="bg-teal-900 h-[60vh] flex flex-col justify-center">
 
         <div class="flex flex-col items-center gap-3">
             <h1 class="logo text-white text-5xl text-center">CuisineCraft</h1>
@@ -35,24 +35,40 @@
 
     <section class="bg-teal-100 py-12">
         <div class="max-w-[1500px] px-8 mx-auto">
-            <h2 class="text-2xl font-semibold mb-6">Explore Restaurants Menus</h2>
+            <h2 class="text-2xl font-semibold mb-6">Explore Restaurants</h2>
 
             <?php
-            $restaurants = [
-                ['id' => 1, 'name' => 'Restaurant 1', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptates.'],
-                ['id' => 2, 'name' => 'Restaurant 2', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptates.'],
-                ['id' => 3, 'name' => 'Restaurant 3', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, voluptates.']
-            ];
+            $env = parse_ini_file('.env');
+            $PG_URL = $env['PG_URL'];
+            $PG_OPTIONS = $env['PG_OPTIONS'];
+
+            // Specify the endpoint ID in connection options
+            $connection_string = $PG_URL . $PG_OPTIONS;
+
+            // Establishing the connection
+            $PG_CONN = pg_connect($connection_string);
+
+            // Checking the connection
+            if (!$PG_CONN) {
+                // echo "Error : Unable to open database\n";
+                exit;
+            }
+
+            // Fetch all restaurants
+            $restaurants_query = "SELECT * FROM restaurants";
+            $restaurants_result = pg_query($PG_CONN, $restaurants_query);
+
+            $restaurants = pg_fetch_all($restaurants_result);
             ?>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
                 <!-- navigate to menu/id -->
 
                 <?php foreach ($restaurants as $restaurant) : ?>
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <h3 class="text-xl font-semibold mb-2"><?= $restaurant['name'] ?></h3>
-                        <p class="text-gray-600 mb-4"><?= $restaurant['description'] ?></p>
+                        <p class="text-gray-600 mb-4"><?= $restaurant['address'] ?></p>
                         <a href="menu.php?id=<?= $restaurant['id'] ?>" class="text-teal-800 rounded-lg">View Menu</a>
                     </div>
                 <?php endforeach; ?>
