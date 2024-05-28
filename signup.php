@@ -4,6 +4,7 @@
 <head>
     <title>Cuisine Craft</title>
     <link rel="stylesheet" href="global.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
