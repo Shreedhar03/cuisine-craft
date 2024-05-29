@@ -1,5 +1,12 @@
 <?php
 
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit;
+}
+
 $env = parse_ini_file('.env');
 $PG_URL = $env['PG_URL'];
 $PG_OPTIONS = $env['PG_OPTIONS'];
@@ -112,23 +119,23 @@ if (!$menu) {
             <?php foreach ($menu as $category) { ?>
 
                 <div class="mt-8 bg-teal-100/70 p-6 rounded-lg">
-                    <h2 class="text-2xl font-bold">
+                    <h2 class="text-xl font-semibold">
                         <?php echo $category['category']; ?>
                     </h2>
 
                     <!-- divider -->
 
-                    <div class="w-16 h-1 bg-teal-900 my-2"></div>
+                    <div class="w-16 h-[2px] bg-teal-900 mb-4 mt-1 rounded"></div>
 
                     <div class="">
 
                         <?php foreach ($category['items'] as $item) { ?>
 
-                            <div class="flex items-end">
-                                <h3 class="text-xl font-semibold">
+                            <div class="flex items-end justify-between">
+                                <h3 class="text-lg font-semibold">
                                     <?php echo $item['name']; ?>
                                 </h3>
-                                <p class="text-gray-500">
+                                <p class="text-gray-900">
                                     Rs. <?php echo $item['price']; ?>
                                 </p>
                             </div>
