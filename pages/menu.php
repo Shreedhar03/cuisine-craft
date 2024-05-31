@@ -91,11 +91,14 @@ if (!$menu) {
 
         <?php
         if (isset($_SESSION['error'])) { ?>
-            <div class="bg-red-100 text-red-700 p-4">
+            <div class="bg-red-100 text-red-700 p-4 mt-3">
                 <?php echo $_SESSION['error']; ?>
-                Error:
             </div>
-        <?php } ?>
+        <?php
+            // Clear the error message after displaying it
+            unset($_SESSION['error']);
+        } ?>
+
 
         <div class="max-w-[1550px] mx-auto p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
