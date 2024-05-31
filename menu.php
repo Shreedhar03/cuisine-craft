@@ -52,6 +52,7 @@ if (!$menu) {
     // echo "Menu fetched successfully\n";
 }
 
+
 ?>
 
 <!DOCTYPE html>
@@ -86,6 +87,16 @@ if (!$menu) {
             </p>
         </div>
 
+        <!-- print errors -->
+
+        <?php
+        if (isset($_SESSION['error'])) { ?>
+            <div class="bg-red-100 text-red-700 p-4">
+                <?php echo $_SESSION['error']; ?>
+                Error:
+            </div>
+        <?php } ?>
+
         <div class="max-w-[1550px] mx-auto p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
             <?php foreach ($menu_items as $category => $items) { ?>
@@ -100,9 +111,14 @@ if (!$menu) {
                     <div class="">
                         <?php foreach ($items as $item) { ?>
                             <div class="flex items-end justify-between">
-                                <h3 class="text-lg font-semibold">
-                                    <?php echo htmlspecialchars($item['name']); ?>
-                                </h3>
+                                <div class="flex items-center gap-2">
+                                    <button class="text-red-500 text-xs bg-red-100 p-1 rounded-full focus:outline-none hover:bg-red-200" onclick="handleDeleteItem(<?php echo $item['id']; ?>)">
+                                        X
+                                    </button>
+                                    <h3 class="text-lg font-semibold">
+                                        <?php echo htmlspecialchars($item['name']); ?>
+                                    </h3>
+                                </div>
                                 <p class="text-gray-900">
                                     Rs. <?php echo htmlspecialchars($item['price']); ?>
                                 </p>
@@ -114,6 +130,38 @@ if (!$menu) {
         </div>
 
     </main>
+
+    <script>
+        function handleDeleteItem(itemId) {
+            console.log(itemId)
+            // return;
+            if (confirm('Are you sure you want to delete this item?')) {
+                fetch('handlers/delete_item.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            id: itemId
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Reload the page to see the changes
+                            window.location.reload();
+                        } else {
+                            alert('Failed to delete item: ' + data.error);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred. Please try again.');
+                    });
+            }
+        }
+    </script>
+
 
     <script src="https://cdn.tailwindcss.com"></script>
 
