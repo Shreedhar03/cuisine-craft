@@ -28,6 +28,13 @@ if (!$PG_CONN) {
 
 $restaurantId = $_GET['id'];
 
+// Fetch restaurant details
+
+$restaurant_query = "SELECT * FROM restaurants WHERE id = $restaurantId";
+$restaurant_result = pg_query($PG_CONN, $restaurant_query);
+$restaurant = pg_fetch_assoc($restaurant_result);
+
+
 // fetch menu items along with category name using join and group by category
 $fetchMenu = "SELECT menu_items.id, menu_items.name, menu_items.price, categories.name as category FROM menu_items JOIN categories ON menu_items.category_id = categories.id WHERE menu_items.restaurant_id = $restaurantId GROUP BY menu_items.id, categories.name";
 $menu = pg_query($PG_CONN, $fetchMenu);
@@ -69,11 +76,13 @@ if (!$menu) {
                 </span>
                 Back
             </a>
+
             <h1 class="text-3xl font-bold mt-3">
-                JW Marriott
+                <?php echo htmlspecialchars($restaurant['name']); ?>
+
             </h1>
             <p>
-                123, XYZ Street, ABC City
+                <?php echo htmlspecialchars($restaurant['address']); ?>
             </p>
         </div>
 
