@@ -52,17 +52,27 @@
     $restaurant_result = pg_query($PG_CONN, $restaurant_query);
     $restaurant = pg_fetch_assoc($restaurant_result);
 
-    // Fetch categories and items
+    // Fetch categories
     $fetchMenu = "SELECT * FROM menu_items WHERE restaurant_id = $restaurant_id";
     $menu = pg_query($PG_CONN, $fetchMenu);
 
     $fetchCategories = "SELECT * FROM categories WHERE restaurant_id = $restaurant_id";
     $categories_result = pg_query($PG_CONN, $fetchCategories);
-    // convert to array
+    // convert to assosciative array with id as key and name as value
     $categories = [];
 
     while ($category = pg_fetch_assoc($categories_result)) {
-        $categories[$category['name']] = [];
+        $categories[$category['id']] = $category['name'];
+    }
+
+    // fetch menu items along with category name using join and group by category
+    $fetchMenu = "SELECT menu_items.id, menu_items.name, menu_items.price, categories.name as category FROM menu_items JOIN categories ON menu_items.category_id = categories.id WHERE menu_items.restaurant_id = $restaurant_id GROUP BY menu_items.id, categories.name";
+    $menu = pg_query($PG_CONN, $fetchMenu);
+
+    // print the menu items category wise
+    $menu_items = [];
+    while ($item = pg_fetch_assoc($menu)) {
+        $menu_items[$item['category']][] = $item;
     }
 
     ?>
@@ -91,7 +101,7 @@
 
     <!-- add menu item -->
 
-    <form action="handlers/edit_menu.php" class="max-w-[1500px] mx-auto px-12 py-8" method="POST">
+    <form action="handlers/add_item.php" class="max-w-[1500px] mx-auto px-12 py-8" method="POST">
 
         <!-- form to add a new items with a dropdown to select category -->
 
@@ -108,15 +118,10 @@
                 </div>
                 <div>
                     <label for="category" class="block text-sm font-semibold text-gray-700">Category</label>
-                    <select placeholder="Select category" name="category" class="block border border-grey-light w-36 p-3 rounded" required>
+                    <select placeholder="Select category" name="category_id" class="block border border-grey-light w-36 p-3 rounded" required>
                         <?php
-
-                        foreach ($categories as $category => $items) {
-                        ?>
-                            <!-- default placeholder -->
-
-                            <option value="<?php echo $category; ?>"><?php echo $category; ?></option>
-                        <?php
+                        foreach ($categories as $id => $name) {
+                            echo "<option value='$id'>$name</option>";
                         }
                         ?>
                     </select>
@@ -161,12 +166,33 @@
 
     <!-- menu -->
 
-    <div class="max-w-[1500px] mx-auto px-12 py-8">
+    <div class="max-w-[1550px] mx-auto px-12 py-8">
         <h2 class="text-2xl font-bold">Menu</h2>
-        <div class="grid grid-cols-2 gap-8 mt-8">
-            <?php
+        <div class="py-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
-            ?>
+            <?php foreach ($menu_items as $category => $items) { ?>
+                <div class="mt-8 bg-teal-100/70 p-6 rounded-lg">
+                    <h2 class="text-xl font-semibold">
+                        <?php echo htmlspecialchars($category); ?>
+                    </h2>
+
+                    <!-- divider -->
+                    <div class="w-16 h-[2px] bg-teal-900 mb-4 mt-1 rounded"></div>
+
+                    <div class="">
+                        <?php foreach ($items as $item) { ?>
+                            <div class="flex items-end justify-between">
+                                <h3 class="text-lg font-semibold">
+                                    <?php echo htmlspecialchars($item['name']); ?>
+                                </h3>
+                                <p class="text-gray-900">
+                                    Rs. <?php echo htmlspecialchars($item['price']); ?>
+                                </p>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
+            <?php } ?>
         </div>
 
     </div>
