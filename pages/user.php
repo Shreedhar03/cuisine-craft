@@ -3,7 +3,7 @@
 
 <head>
     <title>Cuisine Craft</title>
-    <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="../global.css">
     <!-- scaling -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -18,7 +18,7 @@
         exit;
     }
 
-    $env = parse_ini_file('.env');
+    $env = parse_ini_file('../.env');
     $PG_URL = $env['PG_URL'];
     $PG_OPTIONS = $env['PG_OPTIONS'];
 

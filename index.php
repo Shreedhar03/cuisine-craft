@@ -3,7 +3,7 @@
 
 <head>
     <title>Cuisine Craft</title>
-    <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="../global.css">
     <!-- scaling -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -24,8 +24,8 @@
                 Get your digital menu up and running quickly with our intuitive platform
             </p>
             <div class="flex items-center gap-2">
-                <a href="login.php" class="px-6 py-2 rounded-lg bg-slate-200 text-lg text-teal-800 font-semibold">Login</a>
-                <a href="signup.php" class="px-6 py-2 rounded-lg border border-white text-lg text-white font-semibold">Sign Up</a>
+                <a href="pages/login.php" class="px-6 py-2 rounded-lg bg-slate-200 text-lg text-teal-800 font-semibold">Login</a>
+                <a href="pages/signup.php" class="px-6 py-2 rounded-lg border border-white text-lg text-white font-semibold">Sign Up</a>
             </div>
         </div>
 
@@ -69,7 +69,7 @@
                     <div class="bg-white p-6 rounded-lg shadow-md">
                         <h3 class="text-xl font-semibold mb-2"><?= $restaurant['name'] ?></h3>
                         <p class="text-gray-600 mb-4"><?= $restaurant['address'] ?></p>
-                        <a href="menu.php?id=<?= $restaurant['id'] ?>" class="text-teal-800 rounded-lg">View Menu</a>
+                        <a href="pages/menu.php?id=<?= $restaurant['id'] ?>" class="text-teal-900 text-sm px-4 py-[3px] font-semibold bg-teal-900/20 rounded-lg">View Menu</a>
                     </div>
                 <?php endforeach; ?>
 

@@ -3,7 +3,7 @@
 
 <head>
     <title>Cuisine Craft</title>
-    <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="../global.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -17,7 +17,7 @@
         <div class="bg-white p-16 rounded-lg shadow-lg flex flex-col items-center">
             <h2 class="text-4xl text-center font-bold mb-4 text-gray-800 logo">Cuisine Craft</h2>
             <p class="mb-8 text-xl">Create an account</p>
-            <form action="handlers/signup.php" method="POST" class="grid grid-cols-2 gap-2">
+            <form action="../handlers/signup.php" method="POST" class="grid grid-cols-2 gap-2">
                 <input type="text" autocomplete="FALSE" name="name" placeholder="Full Name" class="block border border-grey-light w-full p-3 rounded mb-4" required />
                 <input type="email" autocomplete="FALSE" name="email" placeholder="Email" class="block border border-grey-light w-full p-3 rounded mb-4" required />
                 <input type="text" autocomplete="FALSE" name="restaurant_name" placeholder="Restaurant Name" class="block border border-grey-light w-full p-3 rounded mb-4" required />
@@ -40,7 +40,7 @@
                 unset($_SESSION['error']);
             }
 
-            $env = parse_ini_file('.env');
+            $env = parse_ini_file('../.env');
             $PG_URL = $env['PG_URL'];
             $PG_OPTIONS = $env['PG_OPTIONS'];
 

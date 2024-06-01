@@ -7,7 +7,7 @@ session_start();
 //     exit;
 // }
 
-$env = parse_ini_file('.env');
+$env = parse_ini_file('../.env');
 $PG_URL = $env['PG_URL'];
 $PG_OPTIONS = $env['PG_OPTIONS'];
 
@@ -113,10 +113,10 @@ if (!$menu) {
 
                     <div class="">
                         <?php foreach ($items as $item) { ?>
-                            <div class="flex items-end justify-between">
+                            <div class="flex items-end justify-between gap-4">
                                 <div class="flex items-center gap-2">
-                                    <button class="text-red-500 text-xs bg-red-100 p-1 rounded-full focus:outline-none hover:bg-red-200" onclick="handleDeleteItem(<?php echo $item['id']; ?>)">
-                                        X
+                                    <button class="text-red-500 text-xs bg-red-100 rounded-full focus:outline-none hover:bg-red-200" onclick="handleDeleteItem(<?php echo $item['id']; ?>)">
+                                        <img src="../assets/cross.svg" class="w-6 h-6" alt="delete" />
                                     </button>
                                     <h3 class="text-lg font-semibold">
                                         <?php echo htmlspecialchars($item['name']); ?>
@@ -139,7 +139,7 @@ if (!$menu) {
             console.log(itemId)
             // return;
             if (confirm('Are you sure you want to delete this item?')) {
-                fetch('handlers/delete_item.php', {
+                fetch('../handlers/delete_item.php', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
