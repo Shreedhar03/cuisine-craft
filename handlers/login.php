@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (pg_num_rows($email_check_result) == 0) {
             $_SESSION['error'] = "Error: Email not found";
             pg_close($PG_CONN);
-            header("Location: ../login.php");
+            header("Location: ../pages/login.php");
             exit;
         }
 
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!password_verify($password, $hashed_password)) {
             $_SESSION['error'] = "Error: Incorrect username or password";
             pg_close($PG_CONN);
-            header("Location: ../login.php");
+            header("Location: ../pages/login.php");
             exit;
         }
 
@@ -49,17 +49,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $_SESSION['user_id'] = $user['id'];
 
-        header("Location: ../user.php");
+        header("Location: ../pages/user.php");
         pg_close($PG_CONN);
 
         exit;
     } else {
         $_SESSION['error'] = "Error: All fields are required";
-        header("Location: ../login.php");
+        header("Location: ../pages/login.php");
         exit;
     }
 } else {
     $_SESSION['error'] = "Error: Invalid request method";
-    header("Location: ../login.php");
+    header("Location: ../pages/login.php");
     exit;
 }

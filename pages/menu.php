@@ -71,7 +71,7 @@ if (!$menu) {
 
         <div class="bg-teal-100/50 p-8">
 
-            <a href="index.php">
+            <a href="../index.php">
                 <span class="text-2xl font-bold">
                     &larr;&nbsp;
                 </span>
@@ -115,9 +115,15 @@ if (!$menu) {
                         <?php foreach ($items as $item) { ?>
                             <div class="flex items-end justify-between gap-4">
                                 <div class="flex items-center gap-2">
-                                    <button class="text-red-500 text-xs bg-red-100 rounded-full focus:outline-none hover:bg-red-200" onclick="handleDeleteItem(<?php echo $item['id']; ?>)">
-                                        <img src="../assets/cross.svg" class="w-6 h-6" alt="delete" />
-                                    </button>
+                                    <?php if (isset($_SESSION['user_id'])) {
+                                    ?>
+                                        <button class="text-red-500 text-xs bg-red-100 rounded-full focus:outline-none hover:bg-red-200" onclick="handleDeleteItem(<?php echo $item['id']; ?>)">
+                                            <img src="../assets/cross.svg" class="w-6 h-6" alt="delete" />
+                                        </button>
+                                    <?php
+                                    }
+                                    ?>
+
                                     <h3 class="text-lg font-semibold">
                                         <?php echo htmlspecialchars($item['name']); ?>
                                     </h3>

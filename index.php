@@ -78,6 +78,10 @@
         </div>
     </section>
 
+    <!--import Footer -->
+
+    <?php include('components/footer.php'); ?>
+
 
     <script src="https://cdn.tailwindcss.com"></script>
 </body>
