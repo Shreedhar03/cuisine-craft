@@ -94,14 +94,14 @@
                 </p>
             </div>
             <button>
-                <a href="handlers/logout.php" class="text-white bg-red-500 px-4 py-[4px] rounded mt-4">Logout</a>
+                <a href="../handlers/logout.php" class="text-white bg-red-500 px-4 py-[4px] rounded mt-4">Logout</a>
             </button>
         </div>
     </main>
 
     <!-- add menu item -->
 
-    <form action="handlers/add_item.php" class="max-w-[1500px] mx-auto px-12 py-8" method="POST">
+    <form action="../handlers/add_item.php" class="max-w-[1500px] mx-auto px-12 py-8" method="POST">
 
         <!-- form to add a new items with a dropdown to select category -->
 
@@ -157,7 +157,7 @@
 
         <!-- form to add a new category -->
 
-        <form action="handlers/add_category.php" method="POST" id="categoryForm" class="flex mx-14 mt-2 gap-2">
+        <form action="../handlers/add_category.php" method="POST" id="categoryForm" class="flex mx-14 mt-2 gap-2">
             <input type="text" name="category_name" placeholder="Category Name" class="block border border-grey-light w-64 px-4 py-2 rounded" required />
             <button type="submit" class="text-white bg-teal-900 px-4 py-2 rounded focus:outline-none hover:bg-teal-700">Add</button>
         </form>
@@ -166,7 +166,7 @@
 
     <!-- menu -->
 
-    <div class="max-w-[1550px] mx-auto px-12 py-8">
+    <div class="max-w-[1550px] mx-auto px-14 py-8">
         <h2 class="text-2xl font-bold">Menu</h2>
         <div class="py-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 

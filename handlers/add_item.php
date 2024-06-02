@@ -33,11 +33,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($add_item_result) {
             $_SESSION['success'] = "Item added successfully";
-            header("Location: ../user.php");
+            header("Location: ../pages/user.php");
             exit;
         } else {
             $_SESSION['error'] = "Error: Unable to add category";
-            header("Location: ../user.php");
+            header("Location: ../pages/user.php");
             exit;
         }
     } else {
@@ -45,6 +45,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 } else {
     $_SESSION['error'] = "Error: Invalid request method";
-    header("Location: ../login.php");
+    header("Location: ../pages/login.php");
     exit;
 }
