@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($password !== $confirm_password) {
             $_SESSION['error'] = "Error: Passwords do not match";
-            header("Location: ../signup.php");
+            header("Location: ../pages/signup.php");
             exit;
         }
 
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (pg_num_rows($email_check_result) > 0) {
             $_SESSION['error'] = "Error: Email is already in use";
             pg_close($PG_CONN);
-            header("Location: ../signup.php");
+            header("Location: ../pages/signup.php");
             exit;
         }
 
@@ -55,27 +55,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (!$result) {
                 $_SESSION['error'] = error_get_last()['message'];
                 pg_close($PG_CONN);
-                header("Location: ../signup.php");
+                header("Location: ../pages/signup.php");
                 exit;
             }
         } else {
             // Restaurant creation failed
             $_SESSION['error'] = error_get_last()['message'];
             pg_close($PG_CONN);
-            header("Location: ../signup.php");
+            header("Location: ../pages/signup.php");
             exit;
         }
 
 
         pg_close($PG_CONN);
-        header("Location: ../login.php");
+        header("Location: ../pages/login.php");
         exit;
     } else {
         $_SESSION['error'] = "Error: All fields are required";
-        header("Location: ../signup.php");
+        header("Location: ../pages/signup.php");
         exit;
     }
 } else {
-    header("Location: ../signup.php");
+    header("Location: ../pages/signup.php");
     exit;
 }

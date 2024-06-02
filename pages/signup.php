@@ -15,7 +15,7 @@
 
     <div class="flex justify-center items-center h-screen bg-teal-100/50">
         <div class="bg-white p-16 rounded-lg shadow-lg flex flex-col items-center">
-            <h2 class="text-4xl text-center font-bold mb-4 text-gray-800 logo">Cuisine Craft</h2>
+            <?php include('../components/logo.php'); ?>
             <p class="mb-8 text-xl">Create an account</p>
             <form action="../handlers/signup.php" method="POST" class="grid grid-cols-2 gap-2">
                 <input type="text" autocomplete="FALSE" name="name" placeholder="Full Name" class="block border border-grey-light w-full p-3 rounded mb-4" required />
