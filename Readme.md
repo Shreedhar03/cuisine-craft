@@ -4,6 +4,10 @@
 
 CuisineCraft is a PHP application for managing restaurants' digital menus with ease.
 
+<!-- add an image -->
+
+![Preview Image]('assets/preview.png')
+
 ## Features
 
 - **Menu Management:** Add, edit, and delete menu items effortlessly.
