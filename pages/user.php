@@ -168,7 +168,7 @@
 
     <div class="max-w-[1550px] mx-auto px-14 py-8">
         <h2 class="text-2xl font-bold">Menu</h2>
-        <div class="py-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
             <?php foreach ($menu_items as $category => $items) { ?>
                 <div class="mt-8 bg-teal-100/70 p-6 rounded-lg">
@@ -179,14 +179,25 @@
                     <!-- divider -->
                     <div class="w-16 h-[2px] bg-teal-900 mb-4 mt-1 rounded"></div>
 
-                    <div class="">
+                    <div class="flex flex-col gap-1">
                         <?php foreach ($items as $item) { ?>
                             <div class="flex items-end justify-between">
-                                <h3 class="text-lg font-semibold">
-                                    <?php echo htmlspecialchars($item['name']); ?>
-                                </h3>
-                                <p class="text-gray-900">
-                                    Rs. <?php echo htmlspecialchars($item['price']); ?>
+                                <div class="flex gap-2">
+                                    <?php if (isset($_SESSION['user_id'])) {
+                                    ?>
+                                        <button class="text-red-500 text-[3px] bg-red-100 rounded-full focus:outline-none hover:bg-red-200" onclick="handleDeleteItem(<?php echo $item['id']; ?>)">
+                                            <img src="../assets/cross.svg" class="w-6 h-6" alt="delete" />
+                                        </button>
+                                    <?php
+                                    }
+                                    ?>
+
+                                    <h3 class="text-lg font-semibold">
+                                        <?php echo htmlspecialchars($item['name']); ?>
+                                    </h3>
+                                </div>
+                                <p class="text-gray-900 font-medium">
+                                    <?php echo htmlspecialchars($item['price']); ?>
                                 </p>
                             </div>
                         <?php } ?>

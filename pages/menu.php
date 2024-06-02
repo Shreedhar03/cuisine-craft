@@ -129,7 +129,7 @@ if (!$menu) {
                                     </h3>
                                 </div>
                                 <p class="text-gray-900">
-                                    Rs. <?php echo htmlspecialchars($item['price']); ?>
+                                    <?php echo htmlspecialchars($item['price']); ?>
                                 </p>
                             </div>
                         <?php } ?>
