@@ -2,7 +2,8 @@
 
 # CuisineCraft🍽️
 
-CuisineCraft is an application for managing restaurants' digital menus with ease.
+CuisineCraft is an application for managing restaurants' digital menus with ease
+
 Made using PHP and PostgreSQL
 
 ## App Preview
