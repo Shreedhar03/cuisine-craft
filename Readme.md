@@ -24,3 +24,22 @@ Made using PHP and PostgreSQL
 
 - **Image Uploads:** Easily upload images for menu items to enhance visual appeal.
 - Stay tuned for the live link to access CuisineCraft!
+
+## Run the project locally
+
+1. Install a PHP compatible stack (LAMP/WAMP/MAMP). [XAMPP](https://apachefriends.org/) is a good recommendation.
+
+2. Clone this repository.
+
+3. Create a PostgreSQL database on Vercel named `cuisine-craft`
+
+4. Create a `.env` file in the root directory with the following content
+
+```env
+PG_URL='YOUR_PG_URL'
+PG_OPTIONS='YOUR_PG_OPTIONS'
+```
+
+5. Run the project using [PHP Server](https://marketplace.visualstudio.com/items?itemName=brapifra.phpserver)
+
+6. Access the application at `https://localhost:3000/index.php`
