@@ -115,15 +115,6 @@ if (!$menu) {
                         <?php foreach ($items as $item) { ?>
                             <div class="flex items-end justify-between gap-4">
                                 <div class="flex items-center gap-2">
-                                    <?php if (isset($_SESSION['user_id'])) {
-                                    ?>
-                                        <button class="text-red-500 text-xs bg-red-100 rounded-full focus:outline-none hover:bg-red-200" onclick="handleDeleteItem(<?php echo $item['id']; ?>)">
-                                            <img src="../assets/cross.svg" class="w-6 h-6" alt="delete" />
-                                        </button>
-                                    <?php
-                                    }
-                                    ?>
-
                                     <h3 class="text-lg font-semibold">
                                         <?php echo htmlspecialchars($item['name']); ?>
                                     </h3>
@@ -139,37 +130,6 @@ if (!$menu) {
         </div>
 
     </main>
-
-    <script>
-        function handleDeleteItem(itemId) {
-            console.log(itemId)
-            // return;
-            if (confirm('Are you sure you want to delete this item?')) {
-                fetch('../handlers/delete_item.php', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            id: itemId
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            // Reload the page to see the changes
-                            window.location.reload();
-                        } else {
-                            alert('Failed to delete item: ' + data.error);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('An error occurred. Please try again.');
-                    });
-            }
-        }
-    </script>
 
 
     <script src="https://cdn.tailwindcss.com"></script>

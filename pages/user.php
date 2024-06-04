@@ -182,17 +182,20 @@
                     <div class="flex flex-col gap-1">
                         <?php foreach ($items as $item) { ?>
                             <div class="flex items-end justify-between">
-                                <div class="flex gap-2">
+                                <div class="flex gap-1 items-center">
                                     <?php if (isset($_SESSION['user_id'])) {
                                     ?>
-                                        <button class="text-red-500 text-[3px] bg-red-100 rounded-full focus:outline-none hover:bg-red-200" onclick="handleDeleteItem(<?php echo $item['id']; ?>)">
-                                            <img src="../assets/cross.svg" class="w-6 h-6" alt="delete" />
+                                        <button class="focus:outline-none" onclick="handleDeleteItem(<?php echo $item['id']; ?>)">
+                                            <img src="../assets/trash.svg" class="w-5 h-5" alt="delete" />
+                                        </button>
+                                        <button class="focus:outline-none" onclick="handleDeleteItem(<?php echo $item['id']; ?>)">
+                                            <img src="../assets/edit.svg" class="w-6 h-6" alt="edit" />
                                         </button>
                                     <?php
                                     }
                                     ?>
 
-                                    <h3 class="text-lg font-semibold">
+                                    <h3 class="text-lg font-semibold ml-2">
                                         <?php echo htmlspecialchars($item['name']); ?>
                                     </h3>
                                 </div>
@@ -214,6 +217,35 @@
 
             category_box.classList.toggle('h-[2rem]');
             category_box.classList.toggle('h-[6rem]');
+        }
+
+        function handleDeleteItem(itemId) {
+            console.log(itemId)
+            // return;
+            if (confirm('Are you sure you want to delete this item?')) {
+                fetch('../handlers/delete_item.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            id: itemId
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Reload the page to see the changes
+                            window.location.reload();
+                        } else {
+                            alert('Failed to delete item: ' + data.error);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred. Please try again.');
+                    });
+            }
         }
     </script>
 
