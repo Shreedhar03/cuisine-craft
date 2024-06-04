@@ -31,7 +31,7 @@ Made using PHP and PostgreSQL
 
 2. Clone this repository.
 
-3. Create a PostgreSQL database on Vercel named `cuisine-craft`
+3. Create a PostgreSQL database named `cuisine-craft` on [Vercel](https://vercel.com/docs/storage/vercel-postgres)
 
 4. Create a `.env` file in the root directory with the following content
 
@@ -42,4 +42,4 @@ PG_OPTIONS='YOUR_PG_OPTIONS'
 
 5. Run the project using [PHP Server](https://marketplace.visualstudio.com/items?itemName=brapifra.phpserver)
 
-6. Access the application at `https://localhost:3000/index.php`
+6. Access the application at `http://localhost:3000/index.php`
