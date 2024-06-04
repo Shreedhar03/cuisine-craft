@@ -1,6 +1,5 @@
 <?php
 session_start();
-header('Content-Type: application/json');
 
 // Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
@@ -24,27 +23,20 @@ if (!$PG_CONN) {
     exit;
 }
 
-// Get the item ID from the request body
-$data = json_decode(file_get_contents('php://input'), true);
-$id = $data['id'] ?? null;
 
-if (!isset($id) || !is_int($id)) {
-    http_response_code(400); // Bad Request
-    echo json_encode(['success' => false, 'error' => 'Invalid or missing item ID']);
-    exit;
-}
-
+// get id, name and price from form data
+$id = $_POST['id'];
+$name = $_POST['newName'];
+$price = $_POST['newPrice'];
 // edit the menu item from the database
 $edit_query = "UPDATE menu_items SET name = $1, price = $2 WHERE id = $3";
-$result = pg_query_params($PG_CONN, $edit_query, [$data['name'], $data['price'], $id]);
-
+$result = pg_query_params($PG_CONN, $edit_query, [$name, $price, $id]);
 
 if ($result) {
-    echo json_encode(['success' => true]);
+    header("Location: ../pages/user.php");
+    exit;
 } else {
-    http_response_code(500); // Internal Server Error
     $_SESSION['error'] = "Error: Unable to edit item";
-    echo json_encode(['success' => false, 'error' => pg_last_error($PG_CONN)]);
 }
 
 // Close the database connection

@@ -181,20 +181,21 @@
 
                     <div class="flex flex-col gap-1">
                         <?php foreach ($items as $item) { ?>
-                            <form action="edit_menu.php" class="flex items-end justify-between">
+                            <form action="../handlers/edit_item.php" method="post" class="flex items-end justify-between">
                                 <div class="flex gap-1 items-center">
                                     <?php if (isset($_SESSION['user_id'])) {
                                     ?>
                                         <button type="button" class="focus:outline-none hideWhenEditing" onclick="handleDeleteItem(<?php echo $item['id']; ?>)">
                                             <img src="../assets/trash.svg" class="w-5 h-5" alt="delete" />
                                         </button>
-                                        <button type="button" class="focus:outline-none hideWhenEditing" onclick="handleEditMenu()">
+                                        <button type="button" class="focus:outline-none hideWhenEditing" onclick="handleEditMenu('<?php echo htmlspecialchars($item['name'], ENT_QUOTES); ?>', <?php echo $item['price']; ?>)">
                                             <img src="../assets/edit.svg" class="w-6 h-6" alt="edit" />
                                         </button>
-                                        <button type="button" class="showWhenEditing hidden focus:outline-none" onclick="handleEditMenu()">
+
+                                        <button type="button" class="showWhenEditing hidden focus:outline-none" onclick="handleEditMenu('', 0 )">
                                             <img src="../assets/cross.svg" class="w-6 h-6" alt="close" />
                                         </button>
-                                        <button type="button" class="showWhenEditing hidden focus:outline-none" onclick="">
+                                        <button type="submit" class="showWhenEditing hidden focus:outline-none" onclick="">
                                             <img src="../assets/check.svg" class="w-6 h-6" alt="check" />
                                         </button>
                                     <?php
@@ -204,8 +205,9 @@
                                     <h3 class="text-lg font-semibold ml-2 hideWhenEditing">
                                         <?php echo htmlspecialchars($item['name']); ?>
                                     </h3>
-                                    <input type="text" name="name" class="showWhenEditing hidden bg-inherit p-2 w-48 font-semibold focus:outline-none border border-teal-900 rounded" placeholder="name">
-                                    <input type="text" name="price" class="showWhenEditing hidden bg-inherit p-2 w-24 font-semibold focus:outline-none border border-teal-900 rounded" placeholder="price">
+                                    <input type="hidden" name="id" value="<?php echo $item['id']; ?>">
+                                    <input required type="text" name="newName" class="showWhenEditing hidden bg-inherit p-2 w-48 font-semibold focus:outline-none border border-teal-900 rounded" placeholder="name">
+                                    <input required type="text" name="newPrice" class="showWhenEditing hidden bg-inherit p-2 w-24 font-semibold focus:outline-none border border-teal-900 rounded" placeholder="price">
 
                                 </div>
                                 <p class="text-gray-900 font-medium hideWhenEditing">
@@ -221,9 +223,14 @@
     </div>
 
     <script>
-        const handleEditMenu = () => {
+        const handleEditMenu = (name, price) => {
             const hideWhenEditing = document.querySelectorAll('.hideWhenEditing');
             const showWhenEditing = document.querySelectorAll('.showWhenEditing');
+
+            // set the value of the input fields
+            document.querySelector('input[name="newName"]').value = name || '';
+            document.querySelector('input[name="newPrice"]').value = price || '';
+
 
             hideWhenEditing.forEach(element => {
                 element.classList.toggle('hidden');
@@ -269,35 +276,6 @@
                     });
             }
         }
-
-        // function handleEditItem(itemId) {
-        //     console.log(itemId)
-        //     // return;
-        //     fetch('../handlers/edit_item.php', {
-        //             method: 'POST',
-        //             headers: {
-        //                 'Content-Type': 'application/json'
-        //             },
-        //             body: JSON.stringify({
-        //                 id: itemId,
-        //                 name: 'Premium Cold Coffee',
-        //                 price: 99,
-        //             })
-        //         })
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             if (data.success) {
-        //                 // Reload the page to see the changes
-        //                 window.location.reload();
-        //             } else {
-        //                 alert('Failed to edit item: ' + data.error);
-        //             }
-        //         })
-        //         .catch(error => {
-        //             console.error('Error:', error);
-        //             alert('An error occurred. Please try again.');
-        //         });
-        // }
     </script>
 
 
