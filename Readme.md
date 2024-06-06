@@ -11,6 +11,7 @@ Made using PHP and PostgreSQL
 <!-- add an image -->
 
 ![User Dashboard](assets/menu.png)
+![User Dashboard](assets/image.png)
 ![Registration Page](assets/signup.png)
 ![Home Page](assets/home.png)
 
