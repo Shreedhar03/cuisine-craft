@@ -20,10 +20,10 @@ Made using PHP and PostgreSQL
 - **Menu Management:** Add, edit, and delete menu items effortlessly.
 - **User-Friendly Interface:** Simple and intuitive interface for seamless navigation.
 - **Category Organization:** Categorize menu items for better organization.
+- **Image Uploads:** Easily upload images for menu items to enhance visual appeal.
 
 ## Coming Soon
 
-- **Image Uploads:** Easily upload images for menu items to enhance visual appeal.
 - Stay tuned for the live link to access CuisineCraft!
 
 ## Run the project locally
