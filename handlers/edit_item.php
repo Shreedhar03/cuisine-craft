@@ -9,19 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 }
 
 // Load the .env file and get the database connection details
-$env = parse_ini_file('../.env');
-$PG_URL = $env['PG_URL'];
-$PG_OPTIONS = $env['PG_OPTIONS'];
-$connection_string = $PG_URL . $PG_OPTIONS;
-$PG_CONN = pg_connect($connection_string);
-
-if (!$PG_CONN) {
-    echo "alert('Error: Unable to open database')";
-    http_response_code(500); // Internal Server Error
-    $_SESSION['error'] = "Error: Unable to open database";
-    echo json_encode(['success' => false, 'error' => 'Unable to open database']);
-    exit;
-}
+include '../config/db.php';
 
 
 // get id, name and price from form data

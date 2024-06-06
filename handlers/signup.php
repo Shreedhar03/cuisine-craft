@@ -18,19 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        $env = parse_ini_file('../.env');
-        $PG_URL = $env['PG_URL'];
-        $PG_OPTIONS = $env['PG_OPTIONS'];
-
-        $connection_string = $PG_URL . $PG_OPTIONS;
-        $PG_CONN = pg_connect($connection_string);
-
-        // Checking the connection
-        if (!$PG_CONN) {
-            // echo "Error : Unable to open database\n";
-        } else {
-            // echo "Opened database successfully\n";
-        }
+        include '../config/db.php';
 
         // Check if the email already exists
         $email_check_query = "SELECT * FROM Users WHERE email = '$email'";

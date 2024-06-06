@@ -92,6 +92,13 @@
                 <p>
                     <?php echo $restaurant['address']; ?>
                 </p>
+                <!-- upload restaurant images button -->
+                <a href="../handlers/upload_images.php" class="flex items-center gap-1 font-semibold text-teal-900 bg-teal-900/20 px-5 py-2 rounded mt-4">
+                    <img src="../assets/upload.svg" alt="upload" class="w-6 h-6">
+                    <span>
+                        Upload Restaurant Images
+                    </span>
+                </a>
             </div>
             <button>
                 <a href="../handlers/logout.php" class="text-white bg-red-500 px-4 py-[4px] rounded mt-4">Logout</a>
